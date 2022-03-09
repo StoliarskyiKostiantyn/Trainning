@@ -15,12 +15,11 @@ const images = [
   },
 ];
 
-const sringEl = images
-  .map((e) => {
-    return `<li>
-      <img href="${e.url}" alt="${e.alt}"/>
+const makeOneImage = (image) => {
+  return `<li>
+      <img src="${image.url}" width=1000 alt="${image.alt}"/>
     </li>`;
-  })
-  .join("");
+};
 
-galleryEl.insertAdjacentHTML("afterbegin", sringEl);
+const makeGallery = images.map(makeOneImage).join("");
+galleryEl.insertAdjacentHTML("afterbegin", makeGallery);
