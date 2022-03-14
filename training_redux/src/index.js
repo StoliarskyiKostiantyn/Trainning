@@ -3,9 +3,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import store from "./redux/store";
-import { myAction } from "./redux/actions";
 
-store.dispatch(myAction(5));
 ReactDOM.render(
   <React.StrictMode>
     <App />
