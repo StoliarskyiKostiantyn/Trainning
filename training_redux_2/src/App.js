@@ -5,6 +5,7 @@ import TodoEditor from './components/TodoEditor';
 import Filter from './components/TodoFilter';
 import Modal from './components/Modal';
 import IconButton from './components/IconButton';
+import Stats from './components/Stats';
 import { ReactComponent as AddIcon } from './icons/add.svg';
 
 class App extends Component {
@@ -34,36 +35,13 @@ class App extends Component {
   //     this.toggleModal();
   //   }
   // }
-
-  toggleCompleted = todoId => {
-    this.setState(({ todos }) => ({
-      todos: todos.map(todo =>
-        todo.id === todoId
-          ? { ...todo, completed: !todo.completed }
-          : todo,
-      ),
-    }));
-  };
-
-  calculateCompletedTodos = () => {
-    const { todos } = this.state;
-
-    return todos.reduce(
-      (total, todo) => (todo.completed ? total + 1 : total),
-      0,
-    );
-  };
-
   toggleModal = () => {
     this.setState(({ showModal }) => ({
       showModal: !showModal,
     }));
   };
-
   render() {
     const { showModal } = this.state;
-    // const totalTodoCount = todos.length;
-    // const completedTodoCount = this.calculateCompletedTodos();
 
     return (
       <Container>
@@ -76,17 +54,11 @@ class App extends Component {
 
         {showModal && (
           <Modal onClose={this.toggleModal}>
-            <TodoEditor />
+            <TodoEditor onSave={this.toggleModal} />
           </Modal>
         )}
-
-        {/* <div>
-          <p>Всего заметок: {totalTodoCount}</p>
-          <p>Выполнено: {completedTodoCount}</p>
-        </div> */}
-
+        <Stats />
         <Filter />
-
         <TodoList />
       </Container>
     );
